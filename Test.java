@@ -10,7 +10,13 @@ public class Test {
 
 		// dhmioyrgia antikeimenwn Car-Driver
 		new Car ("Mercedes","W08","Mercedes",340,1);
+		new Car ("Ferrari","F2018","Ferrari",330,0);
+		new Car ("McLaren","MP24","Honda",325,1);
+		new Car ("RedBull","RB13","Renault",335,1);
 		new Driver ("Lewis Hamilton",(short)32, (short)44, Car.cars[0],4.2);
+		new Driver ("Sebastian Vettel",(short)29, (short)5, Car.cars[1],3.0);
+		new Driver ("Fernando Alonso",(short)36, (short)14, Car.cars[2],5.2);
+		new Driver ("Daniel Ricciardo",(short)27, (short)3, Car.cars[3],1.8);
 
 
 		System.out.println("************* Pole Ranking Results *************");
@@ -38,40 +44,40 @@ public class Test {
 			}
 			//------------Add New Driver----------------
 			else if (choice == 2 ){
-								System.out.println("\n\t\t** -- ADD Driver -- **");
-								System.out.print("Enter Driver's name:");
-								scanner.nextLine();
-								String name = scanner.nextLine();
-								System.out.print("Enter Driver's age:");
-								int age = scanner.nextInt();
-								while (age<=0) {  //Η ηλικία πρέπει να είναι μεγαλύτερη του μηδενός//
-									System.out.println("Age is wrong,insert again");
-									age=scanner.nextInt();
-								}
-								System.out.print("Enter Driver's racing number:");
-								int number = scanner.nextInt();
-								while (number<0) { // Ο αριθμός ενός οδηγού είναι πάντοτε μεγαλύτερος ή ίσος του μηδενός//
-									System.out.println("Please insert again");
-									number=scanner.nextInt();
-								}
-								System.out.print("the available models are:\n");
-								for (int i=0; i<Car.cars.length; i++){
-									if(Car.cars[i]!=null)
-								System.out.println(i+")"+Car.cars[i].toString());
-								}
-								System.out.println("Enter Driver's car");
-								int carNumber= scanner.nextInt();
-								while (carNumber<0 || carNumber>Car.counter-1) { // Ο αριθμός ενός αυτοκινήτου είναι πάντοτε θετικός και μικρότερος του ολικού αριθμού αυτοκινήτων//
-									System.out.println("Please insert again");
-									carNumber=scanner.nextInt();
-								}
-								System.out.print("Enter Driver's lap time:");
-								double laptime= scanner.nextDouble();
-								while (laptime<=0) {
-									System.out.println("Laptime is wrong, please insert again"); //Ο χρονος γύρου είναι πάντοτε μεγαλύτερος του μηδενός//
-									laptime=scanner.nextDouble();
-								}
-								new Driver (name,(short)age, (short)number, Car.cars[carNumber],laptime);
+				System.out.println("\n\t\t** -- ADD Driver -- **");
+				System.out.print("Enter Driver's name:");
+				scanner.nextLine();
+				String name = scanner.nextLine();
+				System.out.print("Enter Driver's age:");
+				int age = scanner.nextInt();
+				while (age<=0) {  //Η ηλικία πρέπει να είναι μεγαλύτερη του μηδενός//
+					System.out.println("Age is wrong,insert again");
+					age=scanner.nextInt();
+				}
+				System.out.print("Enter Driver's racing number:");
+				int number = scanner.nextInt();
+				while (number<0) { // Ο αριθμός ενός οδηγού είναι πάντοτε μεγαλύτερος ή ίσος του μηδενός//
+					System.out.println("Please insert again");
+					number=scanner.nextInt();
+				}
+				System.out.print("the available models are:\n");
+				for (int i=0; i<Car.cars.length; i++){
+					if(Car.cars[i]!=null)
+				System.out.println(i+")"+Car.cars[i].toString());
+				}
+				System.out.println("Enter Driver's car");
+				int carNumber= scanner.nextInt();
+				while (carNumber<0 || carNumber>Car.counter-1) { // Ο αριθμός ενός αυτοκινήτου είναι πάντοτε θετικός και μικρότερος του ολικού αριθμού αυτοκινήτων//
+					System.out.println("Please insert again");
+					carNumber=scanner.nextInt();
+				}
+				System.out.print("Enter Driver's lap time:");
+				double laptime= scanner.nextDouble();
+				while (laptime<=0) {
+					System.out.println("Laptime is wrong, please insert again"); //Ο χρονος γύρου είναι πάντοτε μεγαλύτερος του μηδενός//
+					laptime=scanner.nextDouble();
+				}
+				new Driver (name,(short)age, (short)number, Car.cars[carNumber],laptime);
 
 
 			}
@@ -88,14 +94,14 @@ public class Test {
 			//--------------Change Driver's Lap time-------------
 			else if (choice == 4 ){
 				int tempnum=0;
-			
-				
+
+
 				System.out.println("\tDriver\t\t\tLaptime");
 				System.out.println("\t------\t\t\t-------");
 	//------------Loop with pointer for each of the Drivers that are in the Driver array--------
 	//------------prints the drivers name and lap time --- used d1 instead of i --- d1.getName() instead of Driver[i].getName ()
 				for (Driver d1: Driver.drivers){
-					if(d1 != null) 
+					if(d1 != null)
 						System.out.printf("%d)%-20s\t\t%f\n",tempnum++,d1.getName(),d1.getLapTime());
 				}
 				//---------------------Choose Driver to change LapTime -----------------------
@@ -110,7 +116,7 @@ public class Test {
 					System.err.print("Not A Valid Driver\t");
 					System.out.println("Select Driver Again:");
 					option=scanner.nextInt();
-				}	
+				}
 				//------------Add lap time for the Selected Driver--------------------
 				System.out.printf("Add lap time for %s:",Driver.drivers[option].getName());
 				double lt = scanner.nextDouble();
