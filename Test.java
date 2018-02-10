@@ -87,7 +87,34 @@ public class Test {
 			}
 			//--------------Change Driver's Lap time-------------
 			else if (choice == 4 ){
-
+				int tempnum=0;
+			
+				
+				System.out.println("\tDriver\t\t\tLaptime");
+				System.out.println("\t------\t\t\t-------");
+	//------------Loop with pointer for each of the Drivers that are in the Driver array--------
+	//------------prints the drivers name and lap time --- used d1 instead of i --- d1.getName() instead of Driver[i].getName ()
+				for (Driver d1: Driver.drivers){
+					if(d1 != null) 
+						System.out.printf("%d)%-20s\t\t%f\n",tempnum++,d1.getName(),d1.getLapTime());
+				}
+				//---------------------Choose Driver to change LapTime -----------------------
+				System.out.println("\nSelect Driver (Press 999 to go back to Menu):");
+				int option = scanner.nextInt();
+				if (option == 999) {
+					continue;
+				}
+				//----------------- Limit the choice to only the available Drivers----------
+				//----------------Den evala Driver.length epeidi o pinakas exei 20 theseis--------
+				while (option > Driver.counter-1 || option < 0 ) {
+					System.err.print("Not A Valid Driver\t");
+					System.out.println("Select Driver Again:");
+					option=scanner.nextInt();
+				}	
+				//------------Add lap time for the Selected Driver--------------------
+				System.out.printf("Add lap time for %s:",Driver.drivers[option].getName());
+				double lt = scanner.nextDouble();
+				Driver.drivers[option].setLapTime(lt);
 			}
 			//--------------Show Ranking List----------
 			else if (choice == 5 ){
