@@ -31,7 +31,7 @@ public class Test {
 			System.out.println("Type (5) to see the Ranking Table");
 			System.out.print("Type here:");
 
-			int choice = scanner.nextInt();
+			int choice = GetAnInteger();
 
 			//--------------Display Drivers---------
 			if (choice == 1){
@@ -49,16 +49,16 @@ public class Test {
 				scanner.nextLine();
 				String name = scanner.nextLine();
 				System.out.print("Enter Driver's age:");
-				int age = scanner.nextInt();
+				int age = GetAnInteger();
 				while (age<=0) {  //Η ηλικία πρέπει να είναι μεγαλύτερη του μηδενός//
 					System.out.println("Age is wrong,insert again");
-					age=scanner.nextInt();
+					age=GetAnInteger();
 				}
 				System.out.print("Enter Driver's racing number:");
-				int number = scanner.nextInt();
+				int number = GetAnInteger();
 				while (number<0) { // Ο αριθμός ενός οδηγού είναι πάντοτε μεγαλύτερος ή ίσος του μηδενός//
 					System.out.println("Please insert again");
-					number=scanner.nextInt();
+					number=GetAnInteger();
 				}
 				System.out.print("the available models are:\n");
 				for (int i=0; i<Car.cars.length; i++){
@@ -66,16 +66,16 @@ public class Test {
 				System.out.println(i+")"+Car.cars[i].toString());
 				}
 				System.out.println("Enter Driver's car");
-				int carNumber= scanner.nextInt();
+				int carNumber= GetAnInteger();
 				while (carNumber<0 || carNumber>Car.counter-1) { // Ο αριθμός ενός αυτοκινήτου είναι πάντοτε θετικός και μικρότερος του ολικού αριθμού αυτοκινήτων//
 					System.out.println("Please insert again");
-					carNumber=scanner.nextInt();
+					carNumber=GetAnInteger();
 				}
 				System.out.print("Enter Driver's lap time:");
-				double laptime= scanner.nextDouble();
+				double laptime= GetADouble();
 				while (laptime<=0) {
 					System.out.println("Laptime is wrong, please insert again"); //Ο χρονος γύρου είναι πάντοτε μεγαλύτερος του μηδενός//
-					laptime=scanner.nextDouble();
+					laptime=GetADouble();
 				}
 				new Driver (name,(short)age, (short)number, Car.cars[carNumber],laptime);
 
@@ -106,7 +106,7 @@ public class Test {
 				}
 				//---------------------Choose Driver to change LapTime -----------------------
 				System.out.println("\nSelect Driver (Press 999 to go back to Menu):");
-				int option = scanner.nextInt();
+				int option = GetAnInteger();
 				if (option == 999) {
 					continue;
 				}
@@ -115,22 +115,124 @@ public class Test {
 				while (option > Driver.counter-1 || option < 0 ) {
 					System.err.print("Not A Valid Driver\t");
 					System.out.println("Select Driver Again:");
-					option=scanner.nextInt();
+					option=GetAnInteger();
 				}
 				//------------Add lap time for the Selected Driver--------------------
 				System.out.printf("Add lap time for %s:",Driver.drivers[option].getName());
-				double lt = scanner.nextDouble();
+				double lt = GetADouble();
 				Driver.drivers[option].setLapTime(lt);
 			}
 			//--------------Show Ranking List----------
 			else if (choice == 5 ){
-
-
+				double laptimes[] = new double[50];
+				int checkranking=0;
+				
+				for (Driver d1: Driver.drivers){
+					if(d1 != null) 
+					if (d1.getLapTime() == 0.0)
+						checkranking++;
+				}
+				if (checkranking>3)
+					System.err.println("There is no info for ranking, please insert drivers' lap time! ");
+				else if(checkranking<3) {
+					double tempmin=0;
+					double templt2=0;
+					int indicatorForMin=0;
+					int position=0;
+					
+					for (Driver d1: Driver.drivers){
+						if(d1 != null) 
+								laptimes[position]=d1.getLapTime();
+						position++;
+						
+					}
+					
+					tempmin=getMin(laptimes);
+					
+					//----Short the min values in array----
+					for (int i=0;i<laptimes.length;i++) {
+						for (int j=i;j<laptimes.length;j++){
+							if (tempmin==laptimes[j]) {
+								indicatorForMin=j;
+								break;
+							}
+						}
+						templt2=laptimes[i];
+						if(i==indicatorForMin)
+							laptimes[i]=laptimes[indicatorForMin]+100;
+						else {
+							laptimes[i]=laptimes[indicatorForMin]+100;
+							laptimes[indicatorForMin]=templt2;
+						}
+						tempmin=getMin(laptimes);
+						
+					}
+					//--------------Print of Ranking table----------
+					int pos=1;
+					for (double l1: laptimes){
+						for (Driver d1: Driver.drivers){
+							if(d1 != null) 
+								if (l1==d1.getLapTime()+100) 
+								{
+									System.out.printf("%s sth thesi %d\n",d1.getName(),pos);
+									d1.setRankedPosition((short)(pos++));
+								}
+						}
+					}
+				}
 			}
+
+			
 		}//------------end of while
 	}//-------------end of main
 
-
+	public static int GetAnInteger()
+	{
+		Scanner scanner = new Scanner (System.in);
+		while (true)
+		{
+		   try
+		   {
+			   return scanner.nextInt();
+		   }
+		   
+		   catch (InputMismatchException e)
+		   {
+			   scanner.next();
+			   System.err.print("That's not an integer. Try again: ");
+		   }
+		 }
+	 }
+	
+	
+	public static double GetADouble()
+	{
+		Scanner scanner = new Scanner (System.in);
+		while (true)
+		{
+		   try
+		   {
+			   return scanner.nextDouble();
+		   }
+		   
+		   catch (InputMismatchException e)
+		   {
+			   scanner.next();
+			   System.err.print("That's not a double. Try again: ");
+		   }
+		 }
+	 }
+	
+	public static double getMin(double[] inputArray){ 
+		double minValue = inputArray[0]; 
+		for(int i=1;i<inputArray.length;i++){ 
+		  if(inputArray[i] < minValue){ 
+			minValue = inputArray[i]; 
+		  } 
+		} 
+		return minValue; 
+	   
+	}
 
 
 
