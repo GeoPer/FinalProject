@@ -1,6 +1,6 @@
 
 public class Driver {
-	
+
 	private String name;
 	private short rankedPosition;
 	private short age;
@@ -9,7 +9,7 @@ public class Driver {
 	private Car car;
 	static int counter=0;
 	static Driver drivers[] = new Driver [20];
-	
+
 	public Driver(String name, short age, short racingnumber, Car car, double laptime) {
 		this.name=name;
 		this.age=age;
@@ -70,8 +70,8 @@ public class Driver {
 	@Override
 	public String toString() {
 		return "Driver [name=" + name + ", rankedPosition=" + rankedPosition + ", age=" + age + ", lapTime=" + getLapTime()
-				+ ", racingNumber=" + racingNumber + "]";
+				+ ", racingNumber=" + racingNumber + ", Car= " + getCar().getManufacturer() +"]";
 	}
-	
+
 
 }
