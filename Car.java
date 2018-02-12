@@ -1,20 +1,21 @@
 
+
 public class Car {
 	private String manufacturer;
 	private String model;
 	private String engine;
 	private int maxSpeed;
-	private String[] tires= {"SuperSoft","Soft","Medium","Hard","Wet"};
-	private String tiresType;
+	private String[] tyres= {"SuperSoft","Soft","Medium","Hard","Wet"};
+	private String tyresType;
 	static int counter=0;
 	static Car cars[] = new Car [20];
-	
-	public Car(String manufacturer, String model, String engine, int maxSpeed, int tiresNo) {
+
+	public Car(String manufacturer, String model, String engine, int maxSpeed, int tyresNo) {
 		this.manufacturer=manufacturer;
 		this.model=model;
 		this.engine=engine;
 		this.maxSpeed=maxSpeed;
-		this.tiresType=tires[tiresNo];
+		this.tyresType=tyres[tyresNo];
 		cars[counter++]=this;
 	}
 
@@ -50,18 +51,18 @@ public class Car {
 		this.maxSpeed = maxSpeed;
 	}
 
-	public String getTiresType() {
-		return tiresType;
+	public String getTyresType() {
+		return tyresType;
 	}
 
-	public void setTiresType(String tiresType) {
-		this.tiresType = tiresType;
+	public void setTyresType(String tyresType) {
+		this.tyresType = tyresType;
 	}
 
 	@Override
 	public String toString() {
 		return "Car [manufacturer=" + manufacturer + ", model=" + model + ", engine=" + engine + ", maxSpeed="
-				+ maxSpeed + ", tiresType=" + tiresType + "]";
+				+ maxSpeed + "km/h"+ ", tyresType=" + tyresType + "]";
 	}
-	
+
 }
