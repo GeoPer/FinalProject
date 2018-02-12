@@ -144,8 +144,8 @@ public class Test {
 						d1.setRankedPosition((short)(0));
 				}
 			}
-			
-			
+
+
 			//--------------Show Ranking List----------
 			else if (choice == 5 ){
 				double laptimes[] = new double[Driver.counter];
@@ -153,16 +153,16 @@ public class Test {
 				double templt2=0;
 				int indicatorForMin=0;
 				int position=0;
-				
+
 				for (Driver d1: Driver.drivers){
-					if(d1 != null) 
+					if(d1 != null)
 							laptimes[position]=d1.getLapTime();
 					position++;
-					
+
 				}
-				
+
 				tempmin=getMin(laptimes);
-				
+
 				//----Short the min values in array----
 				for (int i=0;i<laptimes.length;i++) {
 					for (int j=i;j<laptimes.length;j++){
@@ -179,7 +179,7 @@ public class Test {
 						laptimes[indicatorForMin]=templt2;
 					}
 					tempmin=getMin(laptimes);
-					
+
 				}
 				//--------------Print of Ranking table----------
 				int pos=1;
@@ -187,10 +187,10 @@ public class Test {
 				System.out.print("-------------------------------------\n");
 				for (double l1: laptimes){
 					for (Driver d1: Driver.drivers){
-						if(d1 != null) 
-							if (l1==d1.getLapTime()+100 && d1.getRankedPosition()==0) 
+						if(d1 != null)
+							if (l1==d1.getLapTime()+100 && d1.getRankedPosition()==0)
 							{
-								
+
 								System.out.printf("%d| %s\n",pos,d1.getName());
 								System.out.print("-------------------------------------\n");
 								d1.setRankedPosition((short)(pos++));
@@ -202,7 +202,7 @@ public class Test {
 				scanner.nextLine();
 			}
 
-			
+
 		}//------------end of while
 	}//-------------end of main
 
@@ -216,7 +216,7 @@ public class Test {
 		   {
 			   return scanner.nextInt();
 		   }
-		   
+
 		   catch (InputMismatchException e)
 		   {
 			   scanner.next();
@@ -224,7 +224,7 @@ public class Test {
 		   }
 		 }
 	 }
-	
+
 	//-------------validation of Double
 	public static double GetADouble()
 	{
@@ -235,7 +235,7 @@ public class Test {
 		   {
 			   return scanner.nextDouble();
 		   }
-		   
+
 		   catch (InputMismatchException e)
 		   {
 			   scanner.next();
@@ -243,15 +243,15 @@ public class Test {
 		   }
 		 }
 	 }
-	
+
 	//-----------method that returns the min number of an Array
-	public static double getMin(double[] inputArray){ 
-		double minValue = inputArray[0]; 
-		for(int i=1;i<inputArray.length;i++){ 
-		  if(inputArray[i] < minValue){ 
-			minValue = inputArray[i]; 
-		  } 
-		} 
+	public static double getMin(double[] inputArray){
+		double minValue = inputArray[0];
+		for(int i=1;i<inputArray.length;i++){
+		  if(inputArray[i] < minValue){
+			minValue = inputArray[i];
+		  }
+		}
 		return minValue;
 	}
 
